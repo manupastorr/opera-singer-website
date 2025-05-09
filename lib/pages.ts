@@ -29,10 +29,10 @@ export const pages: Page[] = [
     name: "CALENDAR",
     href: "/calendar",
   },
-  // {
-  //   name: "LISTEN",
-  //   href: "/music",
-  // },
+  {
+    name: "PERFORMANCES",
+    href: "/performances",
+  },
   {
     name: "GALLERY",
     children: [

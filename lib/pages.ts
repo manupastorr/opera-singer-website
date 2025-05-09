@@ -30,8 +30,8 @@ export const pages: Page[] = [
     href: "/calendar",
   },
   {
-    name: "PERFORMANCES",
-    href: "/performances",
+    name: "AUDIO & VIDEO",
+    href: "/media",
   },
   {
     name: "GALLERY",

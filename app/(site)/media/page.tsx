@@ -6,7 +6,7 @@ const isAudio = (file: any) =>
 const isVideo = (file: any) =>
   typeof file.file === "string" && /\.(mp4|mov|webm|avi|mkv)$/i.test(file.file);
 
-const Performances = async () => {
+const Media = async () => {
   const media = await getMedia();
 
   // Flatten all files from all media entries and preserve parent title
@@ -69,4 +69,4 @@ const Performances = async () => {
   );
 };
 
-export default Performances;
+export default Media;

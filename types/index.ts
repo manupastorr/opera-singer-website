@@ -54,15 +54,16 @@ export interface Performance extends SanityBody {
   _id: string;
   title: string;
   type: string;
-  composer: string;
-  composition: string;
-  role: string;
-  conductor: string;
-  producer: string;
+  composer?: string | null;
+  composition?: string | null;
+  role?: string | null;
+  conductor?: string | null;
+  instrumentation?: string | null;
+  producer?: string | null;
   firstDate: Date;
-  allDates: string;
+  allDates?: string | null;
   location: string;
-  orchestra: string;
+  orchestra?: string | null;
 }
 
 export interface Gallery extends SanityBody {

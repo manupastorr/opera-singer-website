@@ -9,6 +9,25 @@ import { Performance } from "@/types";
 import { cn } from "@/lib/utils";
 import { lora, montserrat } from "@/lib/fonts";
 
+const buildCalendarDescription = (performance: Performance) => {
+  const headline = [performance.type, performance.title]
+    .filter(Boolean)
+    .join(": ");
+  const details = [
+    performance.composer ? `Composer: ${performance.composer}` : null,
+    performance.composition ? `Program: ${performance.composition}` : null,
+    performance.role ? `Role: ${performance.role}` : null,
+    performance.instrumentation
+      ? `Ensemble: ${performance.instrumentation}`
+      : null,
+    performance.orchestra ? `Orchestra: ${performance.orchestra}` : null,
+    performance.conductor ? `Conductor: ${performance.conductor}` : null,
+    performance.producer ? `Production: ${performance.producer}` : null,
+  ].filter(Boolean);
+
+  return [headline, ...details].filter(Boolean).join(" | ");
+};
+
 // Reusable AddToCalendarButton component
 function CustomAddToCalendarButton(props: {
   performance: Performance;
@@ -42,7 +61,7 @@ function CustomAddToCalendarButton(props: {
         lightMode={props.dark ? undefined : "dark"}
         buttonStyle="round"
         name={props.performance.title}
-        description={`${props.performance.type} of ${props.performance.title} by ${props.performance.composer} at ${props.performance.location}`}
+        description={buildCalendarDescription(props.performance)}
         options={["Apple", "Google", "Outlook.com"]}
         location={props.performance.location}
         startDate={dateStringWithoutTime}
@@ -106,67 +125,139 @@ const SinglePerformance = (performance: Performance) => {
             </motion.h2>
 
             {/* Composer */}
-            <motion.p
-              initial={{
-                x: 75,
-                opacity: 0,
-              }}
-              whileInView={{
-                x: 0,
-                opacity: 1,
-              }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 1.2,
-              }}
-              className={cn("text-2xl font-normal sm:text-3xl", lora.className)}
-            >
-              {performance.composer}
-            </motion.p>
+            {performance.composer && (
+              <motion.p
+                initial={{
+                  x: 75,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1.2,
+                }}
+                className={cn(
+                  "text-2xl font-normal sm:text-3xl",
+                  lora.className,
+                )}
+              >
+                {performance.composer}
+              </motion.p>
+            )}
+
+            {/* Program / Composition */}
+            {performance.composition && (
+              <motion.p
+                initial={{
+                  x: 90,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1.2,
+                }}
+                className="text-sm sm:text-base"
+              >
+                Program: {performance.composition}
+              </motion.p>
+            )}
 
             {/* Role */}
-            <motion.p
-              initial={{
-                x: 100,
-                opacity: 0,
-              }}
-              whileInView={{
-                x: 0,
-                opacity: 1,
-              }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 1.2,
-              }}
-              className="text-sm underline sm:text-base"
-            >
-              {performance.role}
-            </motion.p>
+            {performance.role && (
+              <motion.p
+                initial={{
+                  x: 100,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1.2,
+                }}
+                className="text-sm underline sm:text-base"
+              >
+                {performance.role}
+              </motion.p>
+            )}
 
             {/* Conductor */}
-            <motion.p
-              initial={{
-                x: 125,
-                opacity: 0,
-              }}
-              whileInView={{
-                x: 0,
-                opacity: 1,
-              }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 1.2,
-              }}
-              className="text-sm sm:text-base"
-            >
-              Conductor: {performance.conductor}
-            </motion.p>
+            {performance.conductor && (
+              <motion.p
+                initial={{
+                  x: 125,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1.2,
+                }}
+                className="text-sm sm:text-base"
+              >
+                Conductor: {performance.conductor}
+              </motion.p>
+            )}
+
+            {/* Ensemble / Instrumentation */}
+            {performance.instrumentation && (
+              <motion.p
+                initial={{
+                  x: 140,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1.2,
+                }}
+                className="text-sm sm:text-base"
+              >
+                Ensemble: {performance.instrumentation}
+              </motion.p>
+            )}
+
+            {/* Orchestra */}
+            {performance.orchestra && (
+              <motion.p
+                initial={{
+                  x: 150,
+                  opacity: 0,
+                }}
+                whileInView={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1.2,
+                }}
+                className="text-sm sm:text-base"
+              >
+                Orchestra: {performance.orchestra}
+              </motion.p>
+            )}
 
             {/* Producer (if available) */}
             {performance.producer && (
               <motion.p
                 initial={{
-                  x: 150,
+                  x: 160,
                   opacity: 0,
                 }}
                 whileInView={{

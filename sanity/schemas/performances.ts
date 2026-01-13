@@ -23,6 +23,7 @@ export default defineType({
         list: [
           { title: "Oper", value: "Oper" },
           { title: "Konzert", value: "Konzert" },
+          { title: "Recital", value: "Recital" },
           { title: "Gottesdienst", value: "Gottesdienst" },
         ],
         layout: "radio",
@@ -51,7 +52,13 @@ export default defineType({
       name: "conductor",
       title: "Conductor",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      description: "Optional. Leave blank if there is no conductor.",
+    },
+    {
+      name: "instrumentation",
+      title: "Ensemble / Instrumentation",
+      type: "string",
+      description: "Optional. Example: Voice, flute, piano.",
     },
     {
       name: "producer",

@@ -107,6 +107,7 @@ export async function getPerformances(): Promise<Performance[]> {
       composition,
       role,
       conductor,
+      instrumentation,
       producer,
       firstDate,
       allDates,

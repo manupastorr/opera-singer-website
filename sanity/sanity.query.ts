@@ -155,6 +155,7 @@ export async function getMedia(): Promise<Media[]> {
       title,
       files[] {
         alt,
+        description,
         title,
         "file": asset->url,
       },

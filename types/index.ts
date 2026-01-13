@@ -86,7 +86,7 @@ export interface Media extends SanityBody {
 }
 
 export interface File {
-  description: string;
+  description?: string | null;
   alt: string;
   title: string;
   file: string;

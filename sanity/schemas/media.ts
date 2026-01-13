@@ -27,6 +27,12 @@ export default defineType({
               type: "string",
               title: "Title",
             },
+            {
+              name: "description",
+              type: "text",
+              title: "Description",
+              rows: 3,
+            },
 
             {
               name: "alt",

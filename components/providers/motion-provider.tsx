@@ -7,7 +7,10 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <LazyMotion features={domAnimation} strict>
-      <div data-reduced-motion={prefersReducedMotion ? "true" : "false"}>
+      <div
+        data-reduced-motion={prefersReducedMotion ? "true" : "false"}
+        className="flex min-h-screen flex-1 flex-col"
+      >
         {children}
       </div>
     </LazyMotion>

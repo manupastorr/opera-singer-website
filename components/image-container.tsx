@@ -18,16 +18,14 @@ export default function ImageContainer({ photo }: Props) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Add event listener to handle the modal open and close
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; // Disable scroll when modal is open
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; // Enable scroll when modal is closed
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      // Clean up the event listener
-      document.body.style.overflow = "auto"; // Make sure to enable scroll when component unmounts
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
@@ -47,9 +45,11 @@ export default function ImageContainer({ photo }: Props) {
 
   return (
     <>
-      <div
-        className="group relative flex h-64 cursor-pointer items-center justify-center overflow-hidden rounded-xl text-white"
+      <button
+        type="button"
+        className="group relative flex h-64 w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl border-0 bg-transparent p-0 text-white"
         onClick={openModal}
+        aria-label={`Open image: ${photo.alt}`}
       >
         <Image
           priority
@@ -66,20 +66,20 @@ export default function ImageContainer({ photo }: Props) {
           {photo.photographer && photo.photographer}
         </h2>
         <Maximize2
-          onClick={openModal}
           className="absolute right-3 top-3 hidden cursor-pointer rounded bg-transparent p-1 hover:bg-primary/80 group-hover:flex"
+          aria-hidden="true"
         />
         <DownloadButton photo={photo} className="hidden group-hover:flex" />
-      </div>
+      </button>
 
-      {/* Modal */}
       {isModalOpen && photo.image && (
-        <div
-          className="group fixed inset-0 z-40 flex max-h-screen cursor-pointer items-center justify-center overflow-auto bg-background"
+        <button
+          type="button"
+          className="group fixed inset-0 z-40 flex max-h-screen cursor-pointer items-center justify-center overflow-auto border-0 bg-background p-0"
           onClick={closeModal}
+          aria-label="Close image preview"
         >
           <div className="bg-opacity h-full w-full bg-black text-white">
-            {/* Clip Loader */}
             {isLoading && (
               <div className="absolute z-10 flex h-full w-full items-center justify-center">
                 <ClipLoader
@@ -106,12 +106,12 @@ export default function ImageContainer({ photo }: Props) {
                 <span className="absolute bottom-3 left-3">
                   {photo.photographer && photo.photographer}
                 </span>
-                <Minimize2 className="absolute right-3 top-3 rounded  p-1 hover:bg-primary/80" />
+                <Minimize2 className="absolute right-3 top-3 rounded p-1 hover:bg-primary/80" />
                 <DownloadButton photo={photo} />
               </div>
             )}
           </div>
-        </div>
+        </button>
       )}
     </>
   );

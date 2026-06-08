@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { montserrat } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -11,11 +11,10 @@ type RepertoireRenderProps = {
 };
 
 const RepertoireRender = ({ repertoires }: RepertoireRenderProps) => {
-  console.log("repertoires", repertoires);
   return (
     <section className="container mx-auto flex flex-1 flex-col gap-12 overflow-x-hidden py-8 sm:gap-16 sm:px-16">
       <div className="grid gap-6 sm:grid-cols-repertoire sm:gap-8 lg:gap-16">
-        <motion.h1
+        <m.h1
           initial={{
             x: -50,
             opacity: 0,
@@ -34,10 +33,10 @@ const RepertoireRender = ({ repertoires }: RepertoireRenderProps) => {
           )}
         >
           {repertoires[0].type}
-        </motion.h1>
+        </m.h1>
         <ul className="flex flex-1 flex-col gap-4">
           {repertoires.map((item, index) => (
-            <motion.li
+            <m.li
               initial={{
                 x: 50 + 50 * index * 0.2,
                 opacity: 0,
@@ -52,15 +51,15 @@ const RepertoireRender = ({ repertoires }: RepertoireRenderProps) => {
               viewport={{
                 once: true,
               }}
-              key={index}
+              key={item._id}
               className="group"
             >
               <h2 className="text-xl font-semibold">
                 {`${item.composerFirstName} ${item.composerLastName}`}
               </h2>
               <div>
-                {item.compositions.map((piece, index) => (
-                  <p key={index} className="font-light opacity-50">
+                {item.compositions.map((piece) => (
+                  <p key={`${item._id}-${piece.title}`} className="font-light opacity-50">
                     {piece.title}
                     {piece.role &&
                       piece.role.length > 0 &&
@@ -76,7 +75,7 @@ const RepertoireRender = ({ repertoires }: RepertoireRenderProps) => {
                   </p>
                 ))}
               </div>
-            </motion.li>
+            </m.li>
           ))}
         </ul>
       </div>

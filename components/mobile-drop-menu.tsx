@@ -19,7 +19,7 @@ export function MobileDropMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button>Menu</button>
+        <button type="button">Menu</button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         {pages.map((page) =>

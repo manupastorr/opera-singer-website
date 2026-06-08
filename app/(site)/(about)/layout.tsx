@@ -3,9 +3,7 @@ import Critics from "@/components/critics";
 import { getAbout, getCritics } from "@/sanity/sanity.query";
 
 const AboutLayout = async ({ children }: { children: React.ReactNode }) => {
-  const critics = await getCritics();
-
-  const about = await getAbout();
+  const [critics, about] = await Promise.all([getCritics(), getAbout()]);
 
   return (
     <main className="container flex flex-1 flex-col gap-3 sm:px-16 md:gap-8">

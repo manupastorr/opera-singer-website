@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { useTheme } from "next-themes";
 import { MenuBar } from "./menubar";
@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <header className="z-30 bg-background py-6">
-      <motion.nav
+      <m.nav
         initial={{
           opacity: 0,
           scale: 1,
@@ -36,13 +36,13 @@ const Navbar = () => {
         <div></div>
 
         {/* Desktop Menu */}
-        <motion.nav className="hidden md:inline-flex">
+        <m.nav className="hidden md:inline-flex">
           <Pages />
-        </motion.nav>
+        </m.nav>
 
         {/* Mode Toggle */}
         <ModeToggle />
-      </motion.nav>
+      </m.nav>
     </header>
   );
 };

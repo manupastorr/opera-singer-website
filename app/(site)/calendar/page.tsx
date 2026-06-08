@@ -1,6 +1,9 @@
 import { getPerformances } from "@/sanity/sanity.query";
 
 import Performances from "@/components/performances";
+import { createPageMetadata } from "@/lib/page-metadata";
+
+export const metadata = createPageMetadata("Calendar");
 
 const Calendar = async () => {
   const performances = await getPerformances();

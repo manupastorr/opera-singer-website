@@ -1,5 +1,8 @@
 import MusicPlayer from "@/components/music-player";
+import { createPageMetadata } from "@/lib/page-metadata";
 import { getMedia } from "@/sanity/sanity.query";
+
+export const metadata = createPageMetadata("Media");
 
 const isAudio = (file: any) =>
   typeof file.file === "string" && /\.(mp3|wav|ogg|flac)$/i.test(file.file);
@@ -39,9 +42,9 @@ const Media = async () => {
         {showVideo && (
           <div className="flex flex-col items-center rounded-2xl bg-zinc-900/80 p-6 shadow-lg">
             {showAudio && <h2 className="mb-4 text-xl font-semibold">Watch</h2>}
-            {videos.map((video, index) => (
+            {videos.map((video) => (
               <div
-                key={index}
+                key={video.file}
                 className="mb-8 flex w-full flex-col items-center last:mb-0"
               >
                 {(video.title || video.parentTitle) && (
@@ -53,8 +56,11 @@ const Media = async () => {
                   src={video.file}
                   muted
                   controls
+                  aria-label={video.title || video.parentTitle || "Performance video"}
                   className="max-h-72 w-full rounded-lg border border-zinc-800 object-cover"
-                />
+                >
+                  <track kind="captions" />
+                </video>
                 {video.description && (
                   <div className="mt-3 text-center text-sm text-zinc-300">
                     {video.description}

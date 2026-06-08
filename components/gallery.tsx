@@ -13,8 +13,8 @@ export default async function Gallery({ pictures }: GalleryProps) {
 
   return (
     <section className="my-3 grid grid-cols-gallery gap-2 px-2">
-      {pictures.map((picture, index) => (
-        <ImageContainer photo={picture} key={index} />
+      {pictures.map((picture) => (
+        <ImageContainer photo={picture} key={picture.image} />
       ))}
     </section>
   );

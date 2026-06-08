@@ -1,3 +1,4 @@
+import { MotionProvider } from "@/components/providers/motion-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import type { Metadata } from "next";
@@ -40,9 +41,11 @@ export default function RootLayout({
           enableSystem={false}
           storageKey="theme"
         >
-          <Navbar />
-          {children}
-          <Footer />
+          <MotionProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

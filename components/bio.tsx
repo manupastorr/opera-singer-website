@@ -1,7 +1,7 @@
 "use client";
 
 import { PortableText, PortableTextComponents } from "@portabletext/react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { type Bio } from "@/types";
 
@@ -17,7 +17,7 @@ const components: PortableTextComponents = {
 
 const Bio = ({ bio }: BioProps) => {
   return (
-    <motion.div
+    <m.div
       initial={{
         opacity: 0,
       }}
@@ -30,7 +30,7 @@ const Bio = ({ bio }: BioProps) => {
       className="text-justify"
     >
       <PortableText components={components} value={bio} />
-    </motion.div>
+    </m.div>
   );
 };
 

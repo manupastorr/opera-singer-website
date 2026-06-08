@@ -3,7 +3,7 @@
 import React from "react";
 import { format } from "date-fns";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { Performance } from "@/types";
 import { cn } from "@/lib/utils";
@@ -84,7 +84,7 @@ const SinglePerformance = (performance: Performance) => {
       <div className="relative flex flex-col gap-8" key={performance._id}>
         <div className="flex flex-col text-left sm:flex-row sm:gap-2">
           {/* Performance Type */}
-          <motion.span
+          <m.span
             initial={{
               x: 25,
               opacity: 0,
@@ -100,10 +100,10 @@ const SinglePerformance = (performance: Performance) => {
             className="sm:writing-vertical-rl text-2xl capitalize text-primary sm:text-3xl"
           >
             {performance.type}
-          </motion.span>
+          </m.span>
           <div className="w-full">
             {/* Performance Title */}
-            <motion.h2
+            <m.h2
               initial={{
                 x: 50,
                 opacity: 0,
@@ -122,11 +122,11 @@ const SinglePerformance = (performance: Performance) => {
               )}
             >
               {performance.title}
-            </motion.h2>
+            </m.h2>
 
             {/* Composer */}
             {performance.composer && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 75,
                   opacity: 0,
@@ -145,12 +145,12 @@ const SinglePerformance = (performance: Performance) => {
                 )}
               >
                 {performance.composer}
-              </motion.p>
+              </m.p>
             )}
 
             {/* Program / Composition */}
             {performance.composition && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 90,
                   opacity: 0,
@@ -166,12 +166,12 @@ const SinglePerformance = (performance: Performance) => {
                 className="text-sm sm:text-base"
               >
                 Program: {performance.composition}
-              </motion.p>
+              </m.p>
             )}
 
             {/* Role */}
             {performance.role && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 100,
                   opacity: 0,
@@ -187,12 +187,12 @@ const SinglePerformance = (performance: Performance) => {
                 className="text-sm underline sm:text-base"
               >
                 {performance.role}
-              </motion.p>
+              </m.p>
             )}
 
             {/* Conductor */}
             {performance.conductor && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 125,
                   opacity: 0,
@@ -208,12 +208,12 @@ const SinglePerformance = (performance: Performance) => {
                 className="text-sm sm:text-base"
               >
                 Conductor: {performance.conductor}
-              </motion.p>
+              </m.p>
             )}
 
             {/* Ensemble / Instrumentation */}
             {performance.instrumentation && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 140,
                   opacity: 0,
@@ -229,12 +229,12 @@ const SinglePerformance = (performance: Performance) => {
                 className="text-sm sm:text-base"
               >
                 Ensemble: {performance.instrumentation}
-              </motion.p>
+              </m.p>
             )}
 
             {/* Orchestra */}
             {performance.orchestra && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 150,
                   opacity: 0,
@@ -250,12 +250,12 @@ const SinglePerformance = (performance: Performance) => {
                 className="text-sm sm:text-base"
               >
                 Orchestra: {performance.orchestra}
-              </motion.p>
+              </m.p>
             )}
 
             {/* Producer (if available) */}
             {performance.producer && (
-              <motion.p
+              <m.p
                 initial={{
                   x: 160,
                   opacity: 0,
@@ -271,12 +271,12 @@ const SinglePerformance = (performance: Performance) => {
                 className="text-sm sm:text-base"
               >
                 Production: {performance.producer}
-              </motion.p>
+              </m.p>
             )}
 
             <br />
 
-            <motion.div
+            <m.div
               initial={{
                 x: 175,
                 opacity: 0,
@@ -297,7 +297,7 @@ const SinglePerformance = (performance: Performance) => {
                 </div>
 
                 {/* Performance Location */}
-                <motion.div
+                <m.div
                   initial={{
                     x: 25,
                     opacity: 0,
@@ -320,7 +320,7 @@ const SinglePerformance = (performance: Performance) => {
                   >
                     {performance.location}
                   </a>
-                </motion.div>
+                </m.div>
               </div>
 
               {/* Add to Calendar Button */}
@@ -334,7 +334,7 @@ const SinglePerformance = (performance: Performance) => {
                   dark={true}
                 />
               </>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

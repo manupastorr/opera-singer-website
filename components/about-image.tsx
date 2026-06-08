@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { About } from "@/types";
 import Image from "next/image";
@@ -13,7 +13,7 @@ interface AboutImageProps {
 const AboutImage = ({ about }: AboutImageProps) => {
   const { theme } = useTheme();
   return (
-    <motion.div
+    <m.div
       initial={{
         opacity: 0,
       }}
@@ -42,7 +42,7 @@ const AboutImage = ({ about }: AboutImageProps) => {
         }
         className="object-cover"
       />
-    </motion.div>
+    </m.div>
   );
 };
 

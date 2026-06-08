@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 
@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <footer className="z-0 bg-background">
-      <motion.div
+      <m.div
         initial={{
           opacity: 0,
           scale: 1,
@@ -46,7 +46,7 @@ const Footer = () => {
             <span className="sr-only">(opens in a new tab)</span>
           </a>
         </small>
-      </motion.div>
+      </m.div>
     </footer>
   );
 };

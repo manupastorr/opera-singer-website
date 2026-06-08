@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 import { Performance } from "@/types";
 import SinglePerformance from "@/components/single-performance";
@@ -14,30 +14,49 @@ type PerformancesProps = {
 
 const subscribe = () => () => {};
 
+function groupFuturePerformancesByYear(performances: Performance[]) {
+  const currentDate = new Date();
+  const performancesByYear = new Map<number, Performance[]>();
+
+  for (const performance of performances) {
+    const performanceDate = new Date(performance.firstDate);
+    if (performanceDate <= currentDate) {
+      continue;
+    }
+
+    const year = performanceDate.getFullYear();
+    const yearPerformances = performancesByYear.get(year) ?? [];
+    yearPerformances.push(performance);
+    performancesByYear.set(year, yearPerformances);
+  }
+
+  const futurePerformanceYears = [...performancesByYear.keys()].toSorted(
+    (a, b) => a - b,
+  );
+
+  return futurePerformanceYears.map((year) => ({
+    year,
+    performances: (performancesByYear.get(year) ?? []).toSorted(
+      (a, b) =>
+        new Date(a.firstDate).getTime() - new Date(b.firstDate).getTime(),
+    ),
+  }));
+}
+
 const Performances = ({ performances }: PerformancesProps) => {
   const isClient = useSyncExternalStore(subscribe, () => true, () => false);
-
-  // get the year of each performance, if the performance is in the future
-  const futurePerformanceYears = [
-    ...new Set(
-      performances
-        .filter((performance) => new Date(performance.firstDate) > new Date())
-        .map((performance) => new Date(performance.firstDate).getFullYear()),
-    ),
-  ].sort((a, b) => a - b);
-
-  const currentDate = new Date();
+  const groupedPerformances = groupFuturePerformancesByYear(performances);
 
   return (
     <>
       {isClient &&
-        futurePerformanceYears.map((year, index) => (
+        groupedPerformances.map(({ year, performances: yearPerformances }, index) => (
           <div
             className="w-full flex-col items-center justify-center"
-            key={index}
+            key={year}
           >
             <section className="container flex flex-col items-start justify-center gap-4 overflow-hidden font-light sm:grid sm:grid-cols-calendar md:gap-10 lg:gap-20">
-              <motion.h1
+              <m.h1
                 initial={{
                   x: -100,
                   opacity: 0,
@@ -62,33 +81,17 @@ const Performances = ({ performances }: PerformancesProps) => {
                 )}
               >
                 {year}
-              </motion.h1>
+              </m.h1>
 
-              {/* Future Performances */}
               <div className="flex w-full flex-col gap-8">
-                {performances
-                  .filter(
-                    (performance) =>
-                      new Date(performance.firstDate).getFullYear() === year &&
-                      new Date(performance.firstDate) > currentDate,
-                  )
-                  // sort performances by date
-                  .sort(
-                    (a, b) =>
-                      new Date(a.firstDate).getTime() -
-                      new Date(b.firstDate).getTime(),
-                  )
-                  .map((performance, index) => (
-                    <SinglePerformance key={index} {...performance} />
-                  ))}
+                {yearPerformances.map((performance) => (
+                  <SinglePerformance key={performance._id} {...performance} />
+                ))}
               </div>
             </section>
-            {
-              // add a horizontal rule between each year, except the last
-              index !== futurePerformanceYears.length - 1 && (
-                <hr className="container mt-8 w-full opacity-50" />
-              )
-            }
+            {index !== groupedPerformances.length - 1 && (
+              <hr className="container mt-8 w-full opacity-50" />
+            )}
           </div>
         ))}
     </>

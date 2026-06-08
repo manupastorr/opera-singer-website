@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 
@@ -17,7 +17,7 @@ export default function Hero({ profile }: Props) {
 
   return (
     <main className="mx-auto grid w-full flex-1 items-center justify-items-end overflow-y-auto overflow-x-hidden md:container md:grid-cols-2">
-      <motion.section
+      <m.section
         initial={{
           x: 300,
           opacity: 0,
@@ -60,8 +60,8 @@ export default function Hero({ profile }: Props) {
           {profile.quote}
         </p>
         <span className="opacity-50">{profile.quoteSource}</span>
-      </motion.section>
-      <motion.div
+      </m.section>
+      <m.div
         className={cn(
           "absolute right-0 overflow-hidden",
           theme === "light" ? "bottom-[91.2px] sm:bottom-[59.2px]" : "top-0",
@@ -93,7 +93,7 @@ export default function Hero({ profile }: Props) {
           }
           className="xl:max-h-screen-85 mt-[88px] max-w-screen-sm translate-x-52 object-cover opacity-90 sm:translate-x-28 md:max-w-screen-sm lg:translate-x-0 xl:block xl:w-full xl:max-w-screen-xl"
         />
-      </motion.div>
+      </m.div>
     </main>
   );
 }
@@ -103,7 +103,7 @@ function EqualWidthName({ name }: { name: string }) {
   return (
     <>
       {name.split("").map((letter, index) => (
-        <div key={index} className="inline-block w-11 mx-[2px] sm:w-[72px]">
+        <div key={`${name}-${letter}-${index}`} className="inline-block w-11 mx-[2px] sm:w-[72px]">
           <span className="flex w-full justify-center">{letter}</span>
         </div>
       ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 
 import { Performance } from "@/types";
@@ -12,12 +12,10 @@ type PerformancesProps = {
   performances: Performance[];
 };
 
-const Performances = ({ performances }: PerformancesProps) => {
-  const [isClient, setIsClient] = useState(false);
+const subscribe = () => () => {};
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+const Performances = ({ performances }: PerformancesProps) => {
+  const isClient = useSyncExternalStore(subscribe, () => true, () => false);
 
   // get the year of each performance, if the performance is in the future
   const futurePerformanceYears = [

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "./ui/button";
 
 import { File } from "@/types";
@@ -11,10 +11,6 @@ type Props = {
 
 const MusicPlayer = ({ songs }: Props) => {
   const [currentSong, setCurrentSong] = useState<File | null>(null);
-
-  useEffect(() => {
-    setCurrentSong(currentSong);
-  }, [currentSong]);
 
   return (
     <section className="flex flex-col items-center rounded-xl">
